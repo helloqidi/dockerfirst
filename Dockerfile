@@ -20,6 +20,8 @@ RUN ["./configure"]
 RUN make -j2
 RUN make install -j2
 RUN ruby -v
+RUN /bin/bash -l -c "gem source -r https://rubygems.org/"
+RUN /bin/bash -l -c "gem source -a https://ruby.taobao.org"
 RUN /bin/bash -l -c "gem install bundler --no-ri --no-rdoc"
  
 # Add configuration files in repository to filesystem
