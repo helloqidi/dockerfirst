@@ -11,10 +11,14 @@ RUN apt-get install -qy nodejs
 RUN echo "daemon off;" >> /etc/nginx/nginx.conf
  
 # Install rvm, ruby, bundler
-RUN apt-get -y -q install curl rubygems
-RUN curl -L https://get.rvm.io | bash -s stable
-RUN /usr/local/rvm/bin/rvm requirements
-RUN /usr/local/rvm/bin/rvm install 2.1.0
+WORKDIR /tmp
+RUN wget http://cache.ruby-lang.org/pub/ruby/2.2/ruby-2.2.2.tar.gz
+RUN tar -zxvf ruby-2.2.2.tar.gz
+WORKDIR /tmp/ruby-2.2.2
+RUN ["./configure"]
+RUN make -j2
+RUN make install -j2
+RUN ruby -v
 RUN /bin/bash -l -c "gem install bundler --no-ri --no-rdoc"
  
 # Add configuration files in repository to filesystem
