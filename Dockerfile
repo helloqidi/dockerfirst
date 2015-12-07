@@ -28,6 +28,12 @@ RUN /bin/bash -l -c "gem install bundler --no-ri --no-rdoc"
 ADD config/container/nginx-sites.conf /etc/nginx/sites-enabled/default
 ADD config/container/start-server.sh /usr/bin/start-server
 RUN chmod +x /usr/bin/start-server
+
+#
+WORKDIR /tmp 
+ADD railsapp/Gemfile Gemfile
+ADD railsapp/Gemfile.lock Gemfile.lock
+RUN bundle install 
  
 # Add rails project to project directory
 ADD ./ /rails
@@ -36,7 +42,7 @@ ADD ./ /rails
 WORKDIR /rails
  
 # bundle install
-RUN /bin/bash -l -c "bundle install"
+#RUN /bin/bash -l -c "bundle install"
  
 # Publish port 80
 EXPOSE 80
