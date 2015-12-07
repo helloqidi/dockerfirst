@@ -29,12 +29,6 @@ ADD config/container/nginx-sites.conf /etc/nginx/sites-enabled/default
 ADD config/container/start-server.sh /usr/bin/start-server
 RUN chmod +x /usr/bin/start-server
 
-#
-WORKDIR /tmp 
-ADD Gemfile Gemfile
-ADD Gemfile.lock Gemfile.lock
-RUN bundle install 
- 
 # Add rails project to project directory
 ADD ./ /rails
  
@@ -42,7 +36,8 @@ ADD ./ /rails
 WORKDIR /rails
  
 # bundle install
-#RUN /bin/bash -l -c "bundle install"
+RUN /bin/bash -l -c "bundle install"
+RUN bundle exec rake assets:precompile
  
 # Publish port 80
 EXPOSE 80
