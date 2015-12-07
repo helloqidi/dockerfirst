@@ -8,6 +8,6 @@ stderr_path "#{app_dir}/log/unicorn.stderr.log"
 stdout_path "#{app_dir}/log/unicorn.stdout.log"
  
 worker_processes 1
-listen 8080, tcp_nopush: false
+listen 3002, tcp_nopush: false
 listen "/tmp/unicorn.sock", :backlog => 64
 timeout 30
