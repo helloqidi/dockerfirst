@@ -31,8 +31,8 @@ RUN chmod +x /usr/bin/start-server
 
 #
 WORKDIR /tmp 
-ADD railsapp/Gemfile Gemfile
-ADD railsapp/Gemfile.lock Gemfile.lock
+ADD Gemfile Gemfile
+ADD Gemfile.lock Gemfile.lock
 RUN bundle install 
  
 # Add rails project to project directory
