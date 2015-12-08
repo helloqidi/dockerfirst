@@ -46,6 +46,8 @@ WORKDIR /rails
 #RUN /bin/bash -l -c "bundle exec RAILS_ENV=production rake assets:precompile"
 RUN bundle install 
 ENV SECRET_KEY_BASE 82dfbba16a4fbf76114d0bed04a588315211dbf8e3917cf18df0fecae886db3a5566fd5d02131341f2125250125749bda4e9efe048e93c53cbf0caa15fd4ba8b
+RUN RAILS_ENV=production rake db:create
+RUN RAILS_ENV=production rake db:migrate
 RUN rake assets:precompile
  
 # Publish port 80
